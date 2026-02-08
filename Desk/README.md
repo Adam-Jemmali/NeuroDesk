@@ -1,102 +1,148 @@
-# Tambo Templates
+# 🧠 NeuroDesk — Brain-Inspired Agentic AI Command Center  
 
-Starter templates for building AI-powered apps with Tambo.
+NeuroDesk is a **brain-inspired AI platform** that turns natural language user intent into **safe, auditable real-world action**. Instead of just chatting, NeuroDesk **plans, coordinates AI agents, enforces approvals, and logs everything** — acting like a digital decision-making system with human oversight.
 
-## Official Templates
+At its core, NeuroDesk is an **agentic middleware layer** that bridges conversation and real execution through structured workflows, multi-agent orchestration, and strict guardrails.
 
-| Template                                                                         | Description         | Stack            |
-| -------------------------------------------------------------------------------- | ------------------- | ---------------- |
-| [tambo-template](https://github.com/tambo-ai/tambo-template)                     | Default starter     | Next.js + Tambo  |
-| [tambo-template-tanstack](https://github.com/tambo-ai/tambo-template-tanstack)   | TanStack Router     | Vite + TanStack  |
-| [analytics-template](https://github.com/tambo-ai/analytics-template)             | Analytics dashboard | Next.js + Charts |
-| [betterauth-tambo-example](https://github.com/tambo-ai/betterauth-tambo-example) | Auth integration    | BetterAuth       |
+---
 
-## Contributing a Template
+## 🚀 What NeuroDesk Does  
 
-We have a high quality bar for merging templates. Focus on quality over quantity.
+A user can type a request in plain English such as:  
 
-Want to add a template? Open a PR that adds a new folder to this directory.
+> “Tell me about my flow state!”  
 
-### PR Requirements
+NeuroDesk will:
 
-Your PR must include:
+1. **Parse intent** using an LLM  
+2. **Break the request into subtasks**  
+3. **Route work to specialized agents**  
+4. **Pause for approval if something is risky**  
+5. **Execute safely with budgets and logs**  
+6. **Stream real-time updates to the UI**  
 
-1. **A new folder** in `community/templates/` named after your template (e.g., `community/templates/remix-clerk-starter/`)
-2. **Working code** that runs with `npm install && npm run dev` from within the template folder
-3. **README.md** inside your template folder with:
-   - What the template demonstrates
-   - Setup instructions
-   - Screenshot or GIF (upload to GitHub by dragging into the PR, then use that link)
-4. **Video demo** - Link to a short video demo in the README and PR description. You can [upload videos directly to GitHub](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/attaching-files) by dragging into a comment, then copy the generated link.
+Everything is recorded with a full **audit trail** and **transaction log**, making the system transparent and trustworthy.
 
-### Keep It Simple
+---
 
-Templates should be focused and minimal:
+## 🏗️ Architecture Overview  
 
-- **Starters, not showcases** - Templates should be minimal enough that someone can take it and build something completely different. If you've built a polished app with lots of demo UI, strip it down to the essentials before submitting.
-- **1-3 technologies** is ideal. A template showing "Next.js + Clerk + Tambo" is better than one with 8 different libraries.
-- **One tool per job** - pick ONE auth provider, ONE database, ONE styling solution. Templates with multiple options for the same thing will be rejected.
-- **Minimal dependencies** - only include what's necessary to demonstrate the integration.
-- **Small, readable files** - If your main App file is doing too much, break it up or simplify. Templates should be easy to understand at a glance.
-- **Clean code** - no commented-out code, no unused files, no placeholder TODOs, no hardcoded user names or demo data.
+### Backend (NEXUS Engine)
+Built with **FastAPI**, providing a structured, secure, and scalable core:
 
-### Design Requirements
+- **Intent Parser** (Groq + Gemini fallback)  
+- **Multi-Agent Orchestration**  
+- **ResearchAgent** – web search, scraping, summarization  
+- **CommunicationAgent** – email drafting + sending (approval required)  
+- **PurchaseAgent** – product research & recommendations  
+- **Budget & Approval System**  
+- **PostgreSQL Database + Alembic Migrations**  
+- **Redis for caching & rate limiting**  
+- **Server-Sent Events (SSE) for real-time updates**  
 
-Design quality should match our [official templates](https://github.com/tambo-ai/tambo-template). Or better. Use them as your reference for the visual bar we expect.
+### Frontend (NeuroDesk UI)
+Built with **Next.js + Tambo AI**, acting as the command center:
 
-### Tambo Integration
+- Conversational AI interface  
+- Task dashboard  
+- Live status updates  
+- Approval queue  
+- Spending tracker  
+- Audit activity panel  
 
-We're not expecting a ton of Tambo code. Just **one example** that proves the integration works:
+Tambo is used as the **tool-calling interface**, converting natural language into structured API requests to the FastAPI backend.
 
-- **Auth template** - show that auth works with Tambo
-- **Database template** - one component that can add or display records via AI
-- **Framework template** - existing Tambo components work and are styled correctly in that framework
+---
 
-The video should show a conversation with the AI using your integration. Proper component/tool registration with clear descriptions is required.
+## 🛠️ Tech Stack  
 
-**No workarounds** - Your template must use Tambo's actual APIs correctly. If you run into issues getting components to render or tools to work, [open a bug issue](https://github.com/tambo-ai/tambo/issues/new) and we'll help. Don't hack around problems - templates that bypass Tambo's rendering system will be rejected.
+**Backend**
+- FastAPI  
+- PostgreSQL + SQLAlchemy (async)  
+- Redis  
+- Alembic  
+- Groq (Llama 3.1)  
+- Google Gemini (fallback)  
+- Brave Search API  
+- Resend Email API  
 
-### README Quality
+**Frontend**
+- Next.js  
+- TypeScript  
+- Tambo AI  
+- Tailwind CSS  
 
-Your template's README must include:
+**Real-time**
+- Server-Sent Events (SSE)
 
-- **One-sentence description** - what this template is for.
-- **Screenshot** - showing the app running with Tambo UI visible.
-- **Video link** - demonstrating the AI interaction.
-- **Prerequisites** - what accounts/API keys are needed (e.g., "You'll need a Clerk account").
-- **Setup steps** - numbered, copy-pasteable commands.
-- **What's included** - bullet list of the technologies and what they're used for.
+---
 
-### What Gets Rejected
+## 🎯 Demo Flow  
 
-- Kitchen-sink templates that try to include everything
-- Overcomplicated "showcase" apps disguised as starters
-- Workarounds that bypass Tambo's actual rendering or tool system
-- Broken or incomplete setups
-- Missing video demo
-- Poor documentation
-- Ugly or unstyled UI
-- Not responsive
-- Generic "todo app" without meaningful Tambo integration
-- Duplicating an integration we already have without adding something new
+1. User submits a task in chat  
+2. NeuroDesk sends request to backend  
+3. Backend creates a task + selects agent  
+4. Agent executes work  
+5. Results stream live to UI  
+6. If approval is required, user must confirm  
+7. Everything is logged and stored  
 
-### Template Folder Structure
+Example demo tasks:
+- “Research best laptops under $1000”
+- “Draft a professional email summarizing this research”
+- “Compare product prices and recommend the best option”
 
-```
-community/templates/
-├── your-template-name/
-│   ├── README.md          # Setup instructions + screenshot
-│   ├── package.json
-│   ├── src/
-│   │   └── components/
-│   │       └── tambo/     # Tambo component directory
-│   └── ...
-```
+---
 
-### Ideas for Templates
+## 📂 Repository Structure (High-Level)
 
-- **Frameworks** - Remix, Expo, Astro, or other React frameworks
-- **Auth** - Clerk, Supabase Auth, NextAuth
-- **Database** - Prisma, Drizzle, Convex
-- **Backend** - tRPC, Hono
-- **Use cases** - Real-time apps, dashboards, specific domains
+neurodesk/
+│── frontend/ # Next.js + Tambo UI
+│── nexus_backend/ # FastAPI core system
+│ ├── app/
+│ │ ├── api/
+│ │ ├── services/
+│ │ ├── agents/
+│ │ ├── models/
+│ │ └── schemas/
+│ ├── alembic/
+│ ├── docker-compose.yml
+│ └── requirements.txt
+
+
+---
+
+## 🧾 Key Features  
+
+- Natural language task execution  
+- Multi-agent collaboration  
+- Human-in-the-loop safety  
+- Budget enforcement  
+- Approval workflows  
+- Real-time status updates  
+- Full audit logging  
+- Modular, extensible architecture  
+
+---
+
+## 📌 Why NeuroDesk Matters  
+
+Most AI systems **talk**. NeuroDesk **acts — but safely.**  
+
+It demonstrates a practical model for:
+- Agentic AI  
+- Real-world automation  
+- Responsible AI execution  
+- Human-AI collaboration  
+
+---
+
+## 🔜 Future Work  
+
+Potential next steps include:
+- Real hiring integrations (Upwork/TaskRabbit)  
+- Calendar scheduling automation  
+- Payment execution layer  
+- Contract management  
+- Stronger verification mechanisms  
+- Better security sandboxing  
